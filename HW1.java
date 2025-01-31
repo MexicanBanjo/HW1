@@ -85,19 +85,16 @@ public class HW1 {
          * The method will invoke the method removeElements for each element
          * found in the linked-list that is less than thr parameter value passed.
          */
-        public void removeElementsLT(int ltValue) {
-            // Remove nodes from the head while their values are less than ltValue.
+        public void removeElementsLT ( int ltValue ) {
             while (head != null && head.data < ltValue) {
-                head = head.next;
+                head = head.next; // Move head to next node.
             }
-
-            Node current = head; // Start from the updated head and traverse the list.
-            while (current != null && current.next != null) {
-                // If the next node's data is less than ltValue, skip it.
-                if (current.next.data < ltValue) {
+            Node current = head; // Start from the new head and traverse the list.
+            while (current != null && current.next != null) { // If next node = ltValue, skip it by jumping over via next.next.
+                if (current.next.data == ltValue) {
                     current.next = current.next.next;
-                } else {
-                    current = current.next; // Move to the next node.
+                } else { // Otherwise, move to the next node.
+                    current = current.next;
                 }
             }
         }
@@ -108,18 +105,15 @@ public class HW1 {
          * value equal to the value the provided parameter 'value'.
          */
 
-        public void removeElement(int value) {
-            // Check if the head node contains the target value and remove it if necessary.
-            if (head.data == value) {
-                head = head.next; // Move head to the next node.
+        public void removeElement ( int value ) {
+            if (head.data == value) { // Check if the head node contains the target.
+                head = head.next; // Remove the head via moving the head to the next node.
             }
-
-            Node current = head; // Start traversing from the updated head.
-            while (current.next != null) {
-                // If the next node contains the target value, bypass it.
-                if (current.next.data == value) {
+            Node current = head; // Start traversing from the new head called "current".
+            while (current.next != null) { // Iterate through the list while there are more to check.
+                if (current.next.data == value) { // If the next node contains the target, skip/bypass it.
                     current.next = current.next.next;
-                } 
+                }
                 current = current.next; // Move to the next node.
             }
         }
@@ -175,20 +169,19 @@ public class HW1 {
          * The method should utilize the provided Stack class.
          */
         public static boolean isPalindrome(String input) {
-            Stack<Character> stack = new Stack<>(); // Stack to store characters of the input string.
-            input = input.toLowerCase().replaceAll("\\s+", ""); // Normalize input by removing spaces and converting to lowercase.
+            Stack<Character> stack = new Stack<>(); // Create a stack to store characters of the input string.
+            input = input.toLowerCase().replaceAll("\\s+", ""); // Convert input to lowercase and remove all whitespace.
 
-            // Push each character onto the stack.
-            for (char c : input.toCharArray()) {
+            for (char c : input.toCharArray()) { // Push each character of the string onto the stack.
                 stack.push(c);
             }
 
-            StringBuilder reversed = new StringBuilder(); // To store the reversed string.
-            while (!stack.isEmpty()) {
+            StringBuilder reversed = new StringBuilder(); // Create stringbuilder to store the reversed input.
+            while (!stack.isEmpty()) { // Pop characters from the stack and append them to the string.
                 reversed.append(stack.pop());
             }
-
-            return input.equals(reversed.toString()); // Compare original with reversed string.
+            // This return should compare the original with the reversed string.
+            return input.equals(reversed.toString());
         }
 
 
@@ -218,22 +211,17 @@ public class HW1 {
                 stackArray[index++] = value;
                 tempStack.push(value);
             }
-
             int sz = stackArray.length; // Get the length of stackArray and set it to sz.
             int[] temp = new int[sz];
-
             for (int i = 0; i < sz; i++) { // Reverse stackArray to restore the original order.
                 temp[i] = stackArray[sz - i - 1];
             }
-
             for (int i = 0; i < sz; i++) { // Copy reversed elements back to stackArray.
                 stackArray[i] = temp[i];
             }
-
             while (!tempStack.isEmpty()) { // Restore the original stack.
                 stack.push(tempStack.pop());
             }
-
             int largestIndex = -1; // Set default to -1 if k is not found.
             for (int currentIndex = 0; currentIndex < stackArray.length; currentIndex++) { // Find the last occurence of k.
                 if (stackArray[currentIndex] == k) {
@@ -301,4 +289,6 @@ public class HW1 {
     }
 
 }
+
+
 
