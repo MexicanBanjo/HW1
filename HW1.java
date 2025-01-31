@@ -115,13 +115,12 @@ public class HW1 {
             }
 
             Node current = head; // Start traversing from the updated head.
-            while (current != null && current.next != null) {
+            while (current.next != null) {
                 // If the next node contains the target value, bypass it.
                 if (current.next.data == value) {
                     current.next = current.next.next;
-                } else {
-                    current = current.next; // Move to the next node.
-                }
+                } 
+                current = current.next; // Move to the next node.
             }
         }
 
